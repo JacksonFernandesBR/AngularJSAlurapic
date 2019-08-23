@@ -20,4 +20,4 @@ angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute', 'meusServ
     
 
     $routeProvider.otherwise({redirectTo: '/fotos'});
-});
+}); 
