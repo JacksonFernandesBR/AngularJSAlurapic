@@ -1,5 +1,5 @@
 angular.module('alurapic')
-    .controller('FotoController', function($scope, recursoFoto, $routeParams) {
+    .controller('FotoController', function($scope, recursoFoto, $routeParams, $rootScope, $location) {
 
         $scope.foto = {};
         
@@ -16,7 +16,8 @@ angular.module('alurapic')
                 $scope.foto = foto;
             }, function(erro){
                 console.log(erro);
-                $scope.mensagem = 'Não foi possível obter a foto'
+                $scope.mensagem = ' Não foi possível obter a foto';
+                
             });
         }
 
@@ -36,17 +37,23 @@ angular.module('alurapic')
 
                     recursoFoto.update({fotoId: $scope.foto._id},
                         $scope.foto, function(){
-                            $scope.mensagem = 'Foto alterada com sucesso';
+                            //$scope.mensagem = 'Foto alterada com sucesso';
+                            $rootScope.mensagemGlobal = ' Foto alterada com sucesso';
+                            $location.path('/')
                         }, function(erro){
                             console.log(erro);
                             $scope.mensagem = 'Não foi possível alterar';
+                            
                         });
                 }else{
                     recursoFoto.save($scope.foto, function(){
                         $scope.foto = {};
-                        $scope.mensagem = 'Foto cadastrada com sucesso';                      
+                        //$scope.mensagem = 'Foto cadastrada com sucesso';   
+                        $rootScope.mensagemGlobal = ' Foto cadastrada com sucesso';  
+                        $location.path('/');                 
                     }, function(erro){
-                        $scope.mensagem = 'Não foi possível cadastrar a foto';
+                        //$scope.mensagem = 'Não foi possível cadastrar a foto';
+                        $rootScope.mensagemGlobal = ' Não foi possível cadastrar a foto, tente novamente mais tarde.'; 
                     });
                     
                     
